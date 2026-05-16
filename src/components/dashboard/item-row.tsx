@@ -68,9 +68,7 @@ export function ItemRow({ item }: { item: Item }) {
             {item.tags.map((tag) => (
               <span
                 key={tag}
-                className={cn(
-                  'text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground'
-                )}
+                className={cn('text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground')}
               >
                 {tag}
               </span>

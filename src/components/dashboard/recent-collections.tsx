@@ -11,7 +11,10 @@ export function RecentCollections() {
     <section>
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-sm font-semibold">Collections</h2>
-        <Link href="/collections" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+        <Link
+          href="/collections"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+        >
           View all
         </Link>
       </div>
