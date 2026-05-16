@@ -1,6 +1,6 @@
 # Current Feature
 
-Dashboard Items — Real Data
+Stats & Sidebar — Real Data
 
 ## Status
 
@@ -8,22 +8,24 @@ Completed
 
 ## Goals
 
-- Create `src/lib/db/items.ts` with data fetching functions for pinned and recent items
-- Replace mock pinned and recent items in the dashboard with real data from Neon via Prisma
-- Item card icon/color derived from the item type
-- Display item type tags and all existing item row details
-- If no pinned items, show nothing in the pinned section
+- Display stats (total items, collections, etc.) from real database data instead of mock data
+- Display system item types in the sidebar with their icons, linking to `/items/[typename]`
+- Add "View all collections" link under the collections list that goes to `/collections`
+- Keep star icons for favorite collections; show a colored circle (based on most-used item type) for recent collections
+- Add database functions to `src/lib/db/items.ts` as needed
 
 ## Notes
 
-- Fetch items directly in server component
-- Keep existing design and layout — no visual changes
-- Reference: context/features/dashboard-items-spec.md
+- Keep the current design and layout — no visual changes
+- Fetch data directly in server components
+- Reference `src/lib/db/collections.ts` for patterns
+- Reference: context/features/stats-sidebar-spec.md
 
 ## History
 
 <!-- Keep this updated. Latest to oldest. -->
 
+- **Stats & Sidebar — Real Data** - Replaced mock stats/sidebar data with live Neon data; sidebar item types show real counts; recent collections show colored circle by most-used type; "View all collections" link added (Completed)
 - **Dashboard Items — Real Data** - Replaced mock pinned/recent items with live Neon data; ItemRow now uses embedded itemType for icon/color; no pinned section when empty (Completed)
 - **Dashboard Collections — Real Data** - Replaced mock collections with live Neon data via Prisma; accent color from most-used item type; type icons per collection (Completed)
 - **Seed Data** - Demo user, 7 system item types, 5 collections with 15 items (snippets, prompts, commands, links) (Completed)

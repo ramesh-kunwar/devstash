@@ -3,7 +3,7 @@ import { StatsCards } from '@/components/dashboard/stats-cards'
 import { RecentCollections } from '@/components/dashboard/recent-collections'
 import { ItemRow } from '@/components/dashboard/item-row'
 import { getRecentCollections } from '@/lib/db/collections'
-import { getPinnedItems, getRecentItems } from '@/lib/db/items'
+import { getPinnedItems, getRecentItems, getDashboardStats } from '@/lib/db/items'
 import { prisma } from '@/lib/prisma'
 
 async function getDemoUserId() {
@@ -17,10 +17,13 @@ async function getDemoUserId() {
 export default async function DashboardPage() {
   const userId = await getDemoUserId()
 
-  const [collections, pinnedItems, recentItems] = await Promise.all([
+  const [collections, pinnedItems, recentItems, stats] = await Promise.all([
     userId ? getRecentCollections(userId) : [],
     userId ? getPinnedItems(userId) : [],
     userId ? getRecentItems(userId) : [],
+    userId
+      ? getDashboardStats(userId)
+      : { totalItems: 0, totalCollections: 0, favoriteItems: 0, favoriteCollections: 0 },
   ])
 
   return (
@@ -30,7 +33,7 @@ export default async function DashboardPage() {
         <p className="text-sm text-muted-foreground mt-0.5">Your developer knowledge hub</p>
       </div>
 
-      <StatsCards />
+      <StatsCards stats={stats} />
 
       <RecentCollections collections={collections} />
 
