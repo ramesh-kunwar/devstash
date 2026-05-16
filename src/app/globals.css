@@ -129,6 +129,10 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    transition:
+      background-color 300ms ease,
+      border-color 300ms ease,
+      color 300ms ease;
   }
   body {
     @apply bg-background text-foreground;
