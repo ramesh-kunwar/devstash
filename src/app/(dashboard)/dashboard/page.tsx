@@ -3,11 +3,24 @@ import { mockItems } from '@/lib/mock-data'
 import { StatsCards } from '@/components/dashboard/stats-cards'
 import { RecentCollections } from '@/components/dashboard/recent-collections'
 import { ItemRow } from '@/components/dashboard/item-row'
+import { getRecentCollections } from '@/lib/db/collections'
+import { prisma } from '@/lib/prisma'
 
 const pinnedItems = mockItems.filter((i) => i.isPinned)
 const recentItems = mockItems.slice(0, 10)
 
-export default function DashboardPage() {
+async function getDemoUserId() {
+  const user = await prisma.user.findUnique({
+    where: { email: 'demo@devstash.io' },
+    select: { id: true },
+  })
+  return user?.id ?? null
+}
+
+export default async function DashboardPage() {
+  const userId = await getDemoUserId()
+  const collections = userId ? await getRecentCollections(userId) : []
+
   return (
     <div className="max-w-5xl mx-auto flex flex-col gap-8">
       <div>
@@ -17,7 +30,7 @@ export default function DashboardPage() {
 
       <StatsCards />
 
-      <RecentCollections />
+      <RecentCollections collections={collections} />
 
       {pinnedItems.length > 0 && (
         <section>

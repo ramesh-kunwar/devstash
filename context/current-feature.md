@@ -1,6 +1,6 @@
 # Current Feature
 
-Seed Data
+Dashboard Collections — Real Data
 
 ## Status
 
@@ -10,10 +10,14 @@ Completed
 
 ## Notes
 
+- Do NOT add items list yet — collections only for now
+- Reference: context/features/dashboard-collections-spec.md
+
 ## History
 
 <!-- Keep this updated. Latest to oldest. -->
 
+- **Dashboard Collections — Real Data** - Replaced mock collections with live Neon data via Prisma; accent color from most-used item type; type icons per collection (Completed)
 - **Seed Data** - Demo user, 7 system item types, 5 collections with 15 items (snippets, prompts, commands, links) (Completed)
 - **Neon PostgreSQL + Prisma 7 Setup** - Prisma 7 with @prisma/adapter-neon, prisma.config.ts, full schema with all models, initial migration, and system item types seed (Completed)
 - **Theme Toggle** - Light/dark mode with next-themes, ThemeProvider, and toggle button in top bar (Completed)
