@@ -4,7 +4,7 @@ Dashboard UI Phase 1 - Initial layout, shadcn/ui setup, and top bar
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
@@ -22,6 +22,7 @@ In Progress
 
 ## History
 
-<!-- Keep this updated. Earliest to latest. -->
+<!-- Keep this updated. Latest to oldest. -->
 
+- **Dashboard Phase 1** - shadcn/ui initialized, /dashboard route, dark mode, top bar with search and action buttons, sidebar and main placeholders (Completed)
 - **Initial Setup** - Next.js 16, Tailwind CSS v4, TypeScript configured (Completed)
