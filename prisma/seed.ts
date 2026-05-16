@@ -40,6 +40,7 @@ const reactPatternItems = [
     title: 'useDebounce Hook',
     contentType: ContentType.TEXT,
     language: 'typescript',
+    isPinned: true,
     content: `import { useState, useEffect } from 'react'
 
 export function useDebounce<T>(value: T, delay: number): T {
@@ -121,6 +122,7 @@ const aiWorkflowItems = [
     title: 'Code Review Prompt',
     contentType: ContentType.TEXT,
     language: null,
+    isPinned: true,
     content: `Review the following code and provide feedback on:
 
 1. **Correctness** - Are there any bugs or logic errors?
@@ -312,6 +314,14 @@ async function main() {
     typeMap[type.name] = record.id
   }
 
+  // Clear existing demo user data to avoid duplicates on re-seed
+  const existingUser = await prisma.user.findUnique({ where: { email: 'demo@devstash.io' } })
+  if (existingUser) {
+    console.log('  → Clearing existing demo data...')
+    await prisma.item.deleteMany({ where: { userId: existingUser.id } })
+    await prisma.collection.deleteMany({ where: { userId: existingUser.id } })
+  }
+
   // Demo user
   console.log('  → Creating demo user...')
   const hashedPassword = await bcrypt.hash('12345678', 12)
@@ -338,6 +348,7 @@ async function main() {
       content?: string
       url?: string
       typeName: string
+      isPinned?: boolean
     }>
   ) {
     const collection = await prisma.collection.upsert({
@@ -359,6 +370,7 @@ async function main() {
           content: item.content ?? null,
           url: item.url ?? null,
           language: item.language,
+          isPinned: item.isPinned ?? false,
           userId: user.id,
           itemTypeId: typeMap[item.typeName],
         },
