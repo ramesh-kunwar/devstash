@@ -1,6 +1,6 @@
 # Current Feature
 
-Theme Toggle - Light and dark mode support with persistence
+Neon PostgreSQL + Prisma 7 Setup
 
 ## Status
 
@@ -8,13 +8,25 @@ Completed
 
 ## Goals
 
-d
+- Install and configure Prisma 7 ORM
+- Connect to Neon PostgreSQL (serverless) database
+- Create initial schema based on project-overview.md data models
+- Include NextAuth models (Account, Session, VerificationToken)
+- Add appropriate indexes and cascade deletes
+- Create initial migration (never use db push)
+- Seed system item types
 
 ## Notes
 
-d
+- Use Prisma 7 (breaking changes from v6 — read upgrade guide before implementing)
+- Always use `prisma migrate dev` — never `db push`
+- DATABASE_URL points to development branch; production uses a separate branch
+- Seed script must upsert system item types (snippet, prompt, command, note, file, image, link)
+- Reference: context/features/database-spec.md
 
 ## History
+
+- **Neon PostgreSQL + Prisma 7 Setup** - Prisma 7 with @prisma/adapter-neon, prisma.config.ts, full schema with all models, initial migration, and system item types seed (Completed)
 
 <!-- Keep this updated. Latest to oldest. -->
 
