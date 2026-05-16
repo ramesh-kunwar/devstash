@@ -1,13 +1,10 @@
 import { Pin } from 'lucide-react'
-import { mockItems } from '@/lib/mock-data'
 import { StatsCards } from '@/components/dashboard/stats-cards'
 import { RecentCollections } from '@/components/dashboard/recent-collections'
 import { ItemRow } from '@/components/dashboard/item-row'
 import { getRecentCollections } from '@/lib/db/collections'
+import { getPinnedItems, getRecentItems } from '@/lib/db/items'
 import { prisma } from '@/lib/prisma'
-
-const pinnedItems = mockItems.filter((i) => i.isPinned)
-const recentItems = mockItems.slice(0, 10)
 
 async function getDemoUserId() {
   const user = await prisma.user.findUnique({
@@ -19,7 +16,12 @@ async function getDemoUserId() {
 
 export default async function DashboardPage() {
   const userId = await getDemoUserId()
-  const collections = userId ? await getRecentCollections(userId) : []
+
+  const [collections, pinnedItems, recentItems] = await Promise.all([
+    userId ? getRecentCollections(userId) : [],
+    userId ? getPinnedItems(userId) : [],
+    userId ? getRecentItems(userId) : [],
+  ])
 
   return (
     <div className="max-w-5xl mx-auto flex flex-col gap-8">

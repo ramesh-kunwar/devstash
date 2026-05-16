@@ -9,36 +9,22 @@ import {
   Star,
   Pin,
 } from 'lucide-react'
-import { mockItemTypes } from '@/lib/mock-data'
 import { cn } from '@/lib/utils'
+import type { ItemWithType } from '@/lib/db/items'
 
-const TYPE_ICONS = {
-  snippet: Code,
-  prompt: Sparkles,
-  command: Terminal,
-  note: StickyNote,
-  file: File,
-  image: Image,
-  link: LinkIcon,
-} as const
-
-const typeMap = Object.fromEntries(mockItemTypes.map((t) => [t.id, t]))
-
-type Item = {
-  id: string
-  title: string
-  description: string | null
-  itemTypeId: string
-  isFavorite: boolean
-  isPinned: boolean
-  language: string | null
-  tags: string[]
-  createdAt: string
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Code,
+  Sparkles,
+  Terminal,
+  StickyNote,
+  File,
+  Image,
+  Link: LinkIcon,
 }
 
-export function ItemRow({ item }: { item: Item }) {
-  const type = typeMap[item.itemTypeId]
-  const Icon = type ? TYPE_ICONS[type.name as keyof typeof TYPE_ICONS] : Code
+export function ItemRow({ item }: { item: ItemWithType }) {
+  const Icon = ICON_MAP[item.itemType.icon] ?? Code
+  const color = item.itemType.color
 
   const date = new Date(item.createdAt).toLocaleDateString('en-US', {
     month: 'short',
@@ -49,9 +35,11 @@ export function ItemRow({ item }: { item: Item }) {
     <div className="group flex items-start gap-3 px-4 py-3 rounded-lg border border-border bg-card hover:bg-card/80 transition-colors cursor-pointer">
       <div
         className="size-8 rounded-md flex items-center justify-center shrink-0 mt-0.5"
-        style={{ backgroundColor: type?.color ? `${type.color}20` : '#6b728020' }}
+        style={{ backgroundColor: `${color}20` }}
       >
-        <Icon className="size-4" style={{ color: type?.color ?? '#6b7280' }} />
+        <span style={{ color }}>
+          <Icon className="size-4" />
+        </span>
       </div>
 
       <div className="flex-1 min-w-0">
@@ -67,10 +55,10 @@ export function ItemRow({ item }: { item: Item }) {
           <div className="flex gap-1 mt-1.5 flex-wrap">
             {item.tags.map((tag) => (
               <span
-                key={tag}
+                key={tag.name}
                 className={cn('text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground')}
               >
-                {tag}
+                {tag.name}
               </span>
             ))}
           </div>

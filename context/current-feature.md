@@ -1,6 +1,6 @@
 # Current Feature
 
-Dashboard Collections — Real Data
+Dashboard Items — Real Data
 
 ## Status
 
@@ -8,15 +8,23 @@ Completed
 
 ## Goals
 
+- Create `src/lib/db/items.ts` with data fetching functions for pinned and recent items
+- Replace mock pinned and recent items in the dashboard with real data from Neon via Prisma
+- Item card icon/color derived from the item type
+- Display item type tags and all existing item row details
+- If no pinned items, show nothing in the pinned section
+
 ## Notes
 
-- Do NOT add items list yet — collections only for now
-- Reference: context/features/dashboard-collections-spec.md
+- Fetch items directly in server component
+- Keep existing design and layout — no visual changes
+- Reference: context/features/dashboard-items-spec.md
 
 ## History
 
 <!-- Keep this updated. Latest to oldest. -->
 
+- **Dashboard Items — Real Data** - Replaced mock pinned/recent items with live Neon data; ItemRow now uses embedded itemType for icon/color; no pinned section when empty (Completed)
 - **Dashboard Collections — Real Data** - Replaced mock collections with live Neon data via Prisma; accent color from most-used item type; type icons per collection (Completed)
 - **Seed Data** - Demo user, 7 system item types, 5 collections with 15 items (snippets, prompts, commands, links) (Completed)
 - **Neon PostgreSQL + Prisma 7 Setup** - Prisma 7 with @prisma/adapter-neon, prisma.config.ts, full schema with all models, initial migration, and system item types seed (Completed)
