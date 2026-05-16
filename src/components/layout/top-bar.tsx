@@ -20,7 +20,7 @@ export function TopBar() {
       </div>
 
       <div className="ml-auto flex items-center gap-2">
-          <ThemeToggle />
+        <ThemeToggle />
         <Button variant="outline" size="sm" className="h-8 gap-1.5 text-sm">
           <FolderPlus className="size-4" />
           New Collection

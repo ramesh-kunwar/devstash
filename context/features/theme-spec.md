@@ -36,7 +36,7 @@ In `src/app/layout.tsx`, wrap children with `ThemeProvider`:
 ```tsx
 import { ThemeProvider } from 'next-themes'
 
-<ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+;<ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
   {children}
 </ThemeProvider>
 ```
