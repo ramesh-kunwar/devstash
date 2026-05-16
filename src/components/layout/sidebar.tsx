@@ -123,7 +123,9 @@ function SidebarContent({ collapsed = false }: { collapsed?: boolean }) {
               {!collapsed && (
                 <>
                   <span className="flex-1 truncate">{col.name}</span>
-                  <span className="text-xs text-muted-foreground tabular-nums">{col.itemCount}</span>
+                  <span className="text-xs text-muted-foreground tabular-nums">
+                    {col.itemCount}
+                  </span>
                 </>
               )}
             </Link>
@@ -195,7 +197,11 @@ export function Sidebar() {
             onClick={() => setCollapsed((v) => !v)}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
-            {collapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
+            {collapsed ? (
+              <PanelLeftOpen className="size-4" />
+            ) : (
+              <PanelLeftClose className="size-4" />
+            )}
           </Button>
         </div>
         <div className="flex-1 overflow-y-auto">
